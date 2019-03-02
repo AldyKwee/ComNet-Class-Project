@@ -92,8 +92,8 @@ void setup() {
    // Start advertising
   pAdvertising->start();
   Serial.println("Advertizing started...");
-  delay(1000);
-//  pAdvertising->stop();
+  delay(10000);
+  pAdvertising->stop();
   Serial.printf("enter deep sleep\n");
   esp_deep_sleep(1000000LL * GPIO_DEEP_SLEEP_DURATION);
   Serial.printf("in deep sleep\n");
