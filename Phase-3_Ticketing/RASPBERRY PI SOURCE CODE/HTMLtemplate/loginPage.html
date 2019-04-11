@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'cssMain.css') }}">
+		<title> Main </title>
+	</head>
+	<body>
+		<form action = "/logmein" method = "post">
+			<fieldset>
+				<legend> Login to continue</legend>
+				<label><br> Username: </label>
+				<input type="text" name="username" maxlength="12" id="username"/><br>
+				<label><br> Password: </label>
+				<input type="password" name="password" id="password"/><br>
+				<br><br>
+				<input type="submit" value="Login">
+				<input type="reset">
+			</fieldset>
+		</form>
+	</body>
+
+</html>

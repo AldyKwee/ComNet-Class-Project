@@ -1,6 +1,6 @@
 from datetime import datetime
 import numpy as np
-from mq_new import db, log, purge
+from server import db, log, history, User
 
 def getDateTime():
     return datetime.now()
@@ -28,7 +28,6 @@ def processToDatabase(data, ARGO_PER_HOUR):
     waktu = getDateTime()
     platNomor = str(data)
 
-
     #writing to database
 
     #checking if the car already inside
@@ -45,14 +44,15 @@ def processToDatabase(data, ARGO_PER_HOUR):
             tempIndex = log.query.filter_by(plat = platNomor).first()
             waktuMasuk = datetime.strptime(tempIndex.waktu, '%Y-%m-%d %H:%M:%S.%f')
             waktuKeluar = waktu
+            argo = calculateParkingPrice(waktuMasuk, waktuKeluar, ARGO_PER_HOUR)
             log.query.filter_by(plat = str(platNomor)).delete()
-            db.session.add(purge(plat = str(platNomor), waktuMasuk = waktuMasuk, waktuKeluar = waktu))
+            db.session.add(history(plat = str(platNomor), waktuMasuk = waktuMasuk, waktuKeluar = waktu, argo = argo))
             db.session.commit()
-            return calculateParkingPrice(waktuMasuk, waktuKeluar, ARGO_PER_HOUR)
+            return str(platNomor) + " has paid " + str(int(argo)) + "." + " History Successfully Updated!!"
  
-def purgeAll(purge):
+def purgeAll(history):
     try:
-        num_rows_deleted = db.session.query(purge).delete()
+        num_rows_deleted = db.session.query(history).delete()
         db.session.commit()
         return num_rows_deleted
     except:

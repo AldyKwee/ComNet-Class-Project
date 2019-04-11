@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'cssMain.css') }}">
+		<title> Main </title>
+	</head>
+	<body>
+		<h1>-----------------------------
+		What do you want to do?-----------------------------
+		</h1>
+		
+		<a href="purge"> Purge History Table </a><br><br><br>
+		<a href="viewLog"> View Log Table </a><br><br><br>
+		<a href="viewHistory"> View History Table </a><br><br><br>
+		
+		<br><br><br><br><br>
+		<a href="aboutUs"> About Us </a>
+		<br><br><br>
+		<a href="logout" onclick="msgUser()"> Logout </a>
+	 <script type="text/javascript" src="{{ url_for('static', filename = 'alert_Logout.js')}}"></script>
+	</body>
+
+</html>
